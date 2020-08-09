@@ -3,7 +3,7 @@
 namespace EFCoreApp.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class CategoryController : ControllerBase
     {
         private ICategoryRepository repository;

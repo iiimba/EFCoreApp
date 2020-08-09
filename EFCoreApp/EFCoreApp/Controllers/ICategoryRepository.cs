@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace EFCoreApp.Controllers
 {
     public interface ICategoryRepository
     {
-        IEnumerable<Category> Categories { get; }
+        IQueryable<Category> Categories { get; }
 
         Category GetCategory(long id);
 

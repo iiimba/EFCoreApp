@@ -13,7 +13,7 @@ namespace EFCoreApp.Controllers
             this.context = context;
         }
 
-        public IEnumerable<Category> Categories => this.context.Categories.ToList();
+        public IQueryable<Category> Categories => this.context.Categories;
 
         public Category GetCategory(long id)
         {

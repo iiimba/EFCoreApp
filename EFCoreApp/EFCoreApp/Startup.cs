@@ -30,6 +30,7 @@ namespace EFCore
             services.AddControllers();
             services.AddTransient<IRepository, DataRepository>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
+            services.AddTransient<IOrdersRepository, OrdersRepository>();
             var connectionString = this.Configuration["ConnectionStrings:DefaultConnection"];
             services.AddDbContext<DataContext>(options =>
             {

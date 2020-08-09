@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace EFCore.Controllers
 {
     public interface IRepository
     {
-        IEnumerable<Product> Products { get; }
+        IQueryable<Product> Products { get; }
 
         Product GetProduct(long id);
 

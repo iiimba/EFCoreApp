@@ -13,7 +13,7 @@ namespace EFCore.Controllers
             this.context = context;
         }
 
-        public IEnumerable<Product> Products => this.context.Products.Include(p => p.Category).ToList();
+        public IQueryable<Product> Products => this.context.Products.Include(p => p.Category);
 
         public Product GetProduct(long id)
         {

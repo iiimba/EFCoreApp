@@ -4,7 +4,7 @@ using System.Linq;
 namespace EFCore.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class ProductController : ControllerBase
     {
         private IRepository repository;
