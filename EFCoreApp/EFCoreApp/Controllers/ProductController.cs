@@ -17,10 +17,11 @@ namespace EFCore.Controllers
         [HttpGet]
         public IActionResult GetProducts()
         {
-            return Ok(this.repository.Products);
+            var products = this.repository.Products.Select(p => new { p.Id, p.Name, p.PurchasePrice, p.RetailPrice, CategoryName = p.Category.Name });
+            return Ok(products);
         }
 
-        [HttpGet("Find/{id}")]
+        [HttpGet("{id}")]
         public IActionResult GetProduct(long id)
         {
             if (id == default)
@@ -29,7 +30,7 @@ namespace EFCore.Controllers
             }
 
             var product = this.repository.GetProduct(id);
-            return Ok(product);
+            return Ok(new { product.Id, product.Name, product.PurchasePrice, product.RetailPrice, CategoryName = product.Category.Name });
         }
 
         [HttpPost]
@@ -54,7 +55,7 @@ namespace EFCore.Controllers
             }
 
             // TODO: Temporary decision
-            existingProduct.Category = product.Category;
+            //existingProduct.Category = product.Category;
             existingProduct.Name = product.Name;
             existingProduct.PurchasePrice = product.PurchasePrice;
             existingProduct.RetailPrice = product.RetailPrice;

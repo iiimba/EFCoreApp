@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EFCore.Controllers;
+using EFCoreApp.Controllers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -28,6 +29,7 @@ namespace EFCore
         {
             services.AddControllers();
             services.AddTransient<IRepository, DataRepository>();
+            services.AddTransient<ICategoryRepository, CategoryRepository>();
             var connectionString = this.Configuration["ConnectionStrings:DefaultConnection"];
             services.AddDbContext<DataContext>(options =>
             {

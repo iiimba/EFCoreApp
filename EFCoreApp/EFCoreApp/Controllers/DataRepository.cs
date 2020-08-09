@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace EFCore.Controllers
@@ -12,11 +13,11 @@ namespace EFCore.Controllers
             this.context = context;
         }
 
-        public IEnumerable<Product> Products => this.context.Products.ToList();
+        public IEnumerable<Product> Products => this.context.Products.Include(p => p.Category).ToList();
 
         public Product GetProduct(long id)
         {
-            var product = this.context.Products.Find(id);
+            var product = this.context.Products.Include(p => p.Category).FirstOrDefault(p => p.Id == id);
             return product;
         }
 
@@ -41,7 +42,7 @@ namespace EFCore.Controllers
             {
                 var currentProduct = products.Single(p => p.Id == itemexistingProduct.Id);
                 itemexistingProduct.Name = currentProduct.Name;
-                itemexistingProduct.Category = currentProduct.Category;
+                itemexistingProduct.CategoryId = currentProduct.CategoryId;
                 itemexistingProduct.PurchasePrice = currentProduct.PurchasePrice;
                 itemexistingProduct.RetailPrice = currentProduct.RetailPrice;
             }

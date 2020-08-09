@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using EFCoreApp.Controllers;
+using Microsoft.EntityFrameworkCore;
 
 namespace EFCore.Controllers
 {
@@ -11,5 +12,7 @@ namespace EFCore.Controllers
         }
 
         public DbSet<Product> Products { get; set; }
+
+        public DbSet<Category> Categories { get; set; }
     }
 }
