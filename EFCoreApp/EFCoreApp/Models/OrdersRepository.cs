@@ -1,4 +1,5 @@
 ﻿using EFCore.Models;
+using EFCoreApp.Models.Pages;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
@@ -14,6 +15,16 @@ namespace EFCoreApp.Models
         }
 
         public IQueryable<Order> Orders => this.context.Orders.Include(o => o.Lines).ThenInclude(l => l.Product);
+
+        public PagedList<Order> GetOrders(QueryOptions options)
+        {
+            return new PagedList<Order>(this.context.Orders.Include(p => p.Lines), options);
+        }
+
+        public PagedList<Order> GetProducts(QueryOptions options)
+        {
+            return new PagedList<Order>(this.context.Orders.Include(p => p.Lines), options);
+        }
 
         public void AddOrder(Order order)
         {

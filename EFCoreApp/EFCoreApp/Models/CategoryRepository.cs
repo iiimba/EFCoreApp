@@ -1,5 +1,6 @@
 ﻿using EFCore.Controllers;
 using EFCore.Models;
+using EFCoreApp.Models.Pages;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,6 +16,11 @@ namespace EFCoreApp.Models
         }
 
         public IQueryable<Category> Categories => this.context.Categories;
+
+        public PagedList<Category> GetCategories(QueryOptions options)
+        {
+            return new PagedList<Category>(this.context.Categories, options);
+        }
 
         public Category GetCategory(long id)
         {

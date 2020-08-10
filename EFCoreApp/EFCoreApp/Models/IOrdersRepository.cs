@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using EFCoreApp.Models.Pages;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace EFCoreApp.Models
 {
     public interface IOrdersRepository
     {
         IQueryable<Order> Orders { get; }
+
+        PagedList<Order> GetOrders(QueryOptions options);
 
         Order GetOrder(long id);
 

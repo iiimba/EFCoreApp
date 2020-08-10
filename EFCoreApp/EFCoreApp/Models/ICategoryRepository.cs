@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using EFCoreApp.Models.Pages;
 using System.Linq;
 
 namespace EFCoreApp.Models
@@ -6,6 +6,8 @@ namespace EFCoreApp.Models
     public interface ICategoryRepository
     {
         IQueryable<Category> Categories { get; }
+
+        PagedList<Category> GetCategories(QueryOptions options);
 
         Category GetCategory(long id);
 
