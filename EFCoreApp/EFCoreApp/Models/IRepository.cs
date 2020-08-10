@@ -1,7 +1,7 @@
 ﻿using EFCoreApp.Models;
 using System.Linq;
 
-namespace EFCore.Models
+namespace EFCoreApp.Models
 {
     public interface IRepository
     {
