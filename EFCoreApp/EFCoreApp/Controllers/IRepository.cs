@@ -16,5 +16,7 @@ namespace EFCore.Controllers
         void UpdateAll(Product[] products);
 
         void Delete(Product product);
+
+        void CreateSeedData(int count);
     }
 }

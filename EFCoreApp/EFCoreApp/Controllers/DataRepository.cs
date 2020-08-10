@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
+using System;
 using System.Linq;
 
 namespace EFCore.Controllers
@@ -54,6 +54,60 @@ namespace EFCore.Controllers
         {
             this.context.Products.Remove(product);
             this.context.SaveChanges();
+        }
+
+        public void CreateSeedData(int count)
+        {
+            this.ClearData();
+            if (count > 0)
+            {
+                this.context.Database.SetCommandTimeout(TimeSpan.FromMilliseconds(10));
+                this.context.Database.ExecuteSqlRaw("DROP PROCEDURE IF EXISTS CreateSeedData");
+                this.context.Database.ExecuteSqlRaw($@"CREATE PROCEDURE CreateSeedData
+                    @RowCount decimal
+                    AS
+                    BEGIN
+                        SET NOCOUNT ON
+                        DECLARE @i INT = 1;
+                        DECLARE @catId BIGINT;
+                        DECLARE @CatCount INT = @RowCount / 10;
+                        DECLARE @pprice DECIMAL(5, 2);
+                        DECLARE @rprice DECIMAL(5, 2);
+                        BEGIN TRANSACTION
+                            WHILE @i <= @CatCount
+                            BEGIN
+                                INSERT INTO Categories (Name, Description)
+                                VALUES (CONCAT('Category-', @i), 'Test Data Category');
+
+                                SET @catId = SCOPE_IDENTITY();
+                                DECLARE @j INT = 1;
+                                WHILE @j <= 10
+                                BEGIN
+                                    SET @pprice = RAND() * (500 - 5 + 1);
+                                    SET @rprice = (RAND() * @pprice) + @pprice;
+
+                                    INSERT INTO Products (Name, Categoryid,  PurchasePrice, RetailPrice)
+                                    VALUES (CONCAT('Product', @i, '-', @j), @catId, @pprice, @rprice)
+
+                                    SET @j = @j + 1
+                                    SET @i = @i + 1
+                                END
+                            END
+                        COMMIT
+                    END");
+                this.context.Database.BeginTransaction();
+                this.context.Database.ExecuteSqlRaw($"EXEC CreateSeedData @RowCount = {count}");
+                this.context.Database.CommitTransaction();
+            }
+        }
+
+        private void ClearData()
+        {
+            this.context.Database.SetCommandTimeout(TimeSpan.FromMilliseconds(10));
+            this.context.Database.BeginTransaction();
+            this.context.Database.ExecuteSqlRaw("DELETE FROM Orders");
+            this.context.Database.ExecuteSqlRaw("DELETE FROM Categories");
+            this.context.Database.CommitTransaction();
         }
     }
 }

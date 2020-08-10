@@ -17,7 +17,7 @@ namespace EFCore.Controllers
         [HttpGet]
         public IActionResult GetProducts()
         {
-            var products = this.repository.Products.Select(p => new { p.Id, p.Name, p.PurchasePrice, p.RetailPrice, CategoryName = p.Category.Name });
+            var products = this.repository.Products.Select(p => new { p.Id, p.Name, p.PurchasePrice, p.RetailPrice, CategoryName = p.Category.Name }).Take(20);
             return Ok(products);
         }
 
@@ -42,6 +42,13 @@ namespace EFCore.Controllers
             }
 
             this.repository.AddProduct(product);
+            return Ok();
+        }
+
+        [HttpPost("Seed")]
+        public IActionResult CreateSeedData(int count)
+        {
+            this.repository.CreateSeedData(count);
             return Ok();
         }
 
