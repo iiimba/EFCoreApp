@@ -56,7 +56,7 @@ namespace EFCore.Controllers
         }
 
         [HttpPost("Seed")]
-        public IActionResult CreateSeedData(int count)
+        public IActionResult CreateSeedData(int count = 50000)
         {
             this.repository.CreateSeedData(count);
             return Ok();

@@ -18,5 +18,10 @@ namespace EFCore.Models
         public DbSet<Order> Orders { get; set; }
 
         public DbSet<OrderLine> OrderLines { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Product>().HasIndex(p => p.Name);
+        }
     }
 }
