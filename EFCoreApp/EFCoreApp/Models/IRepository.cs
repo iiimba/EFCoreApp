@@ -1,4 +1,5 @@
 ﻿using EFCoreApp.Models;
+using EFCoreApp.Models.Pages;
 using System.Linq;
 
 namespace EFCoreApp.Models
@@ -6,6 +7,8 @@ namespace EFCoreApp.Models
     public interface IRepository
     {
         IQueryable<Product> Products { get; }
+
+        PagedList<Product> GetProducts(QueryOptions options);
 
         Product GetProduct(long id);
 

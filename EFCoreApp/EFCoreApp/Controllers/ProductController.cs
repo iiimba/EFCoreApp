@@ -1,5 +1,6 @@
 ﻿using EFCore.Models;
 using EFCoreApp.Models;
+using EFCoreApp.Models.Pages;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
@@ -20,6 +21,13 @@ namespace EFCore.Controllers
         public IActionResult GetProducts()
         {
             var products = this.repository.Products.Select(p => new { p.Id, p.Name, p.PurchasePrice, p.RetailPrice, CategoryName = p.Category.Name }).Take(20);
+            return Ok(products);
+        }
+
+        [HttpGet("ByPage")]
+        public IActionResult GetProductsByPage([FromQuery]QueryOptions options)
+        {
+            var products = this.repository.GetProducts(options);
             return Ok(products);
         }
 

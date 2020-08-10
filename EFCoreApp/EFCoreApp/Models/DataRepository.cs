@@ -1,4 +1,5 @@
 ﻿using EFCoreApp.Models;
+using EFCoreApp.Models.Pages;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
@@ -15,6 +16,11 @@ namespace EFCore.Models
         }
 
         public IQueryable<Product> Products => this.context.Products.Include(p => p.Category);
+
+        public PagedList<Product> GetProducts(QueryOptions options)
+        {
+            return new PagedList<Product>(this.context.Products.Include(p => p.Category), options);
+        }
 
         public Product GetProduct(long id)
         {
