@@ -1,6 +1,6 @@
 ﻿using EFCoreApp.Controllers;
 
-namespace EFCore.Controllers
+namespace EFCoreApp.Models
 {
     public class Product
     {

@@ -1,4 +1,4 @@
-﻿namespace EFCoreApp.Controllers
+﻿namespace EFCoreApp.Models
 {
     public class Category
     {

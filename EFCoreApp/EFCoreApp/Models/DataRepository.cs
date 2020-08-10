@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using EFCoreApp.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 
-namespace EFCore.Controllers
+namespace EFCore.Models
 {
     public class DataRepository : IRepository
     {

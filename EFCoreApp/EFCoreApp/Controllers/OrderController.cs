@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using EFCoreApp.Models;
+using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
 namespace EFCoreApp.Controllers

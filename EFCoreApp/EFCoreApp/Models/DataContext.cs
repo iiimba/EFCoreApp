@@ -1,7 +1,7 @@
-﻿using EFCoreApp.Controllers;
+﻿using EFCoreApp.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace EFCore.Controllers
+namespace EFCore.Models
 {
     public class DataContext : DbContext
     {

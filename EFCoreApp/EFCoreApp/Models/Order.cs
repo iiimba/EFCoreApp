@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace EFCoreApp.Controllers
+namespace EFCoreApp.Models
 {
     public class Order
     {

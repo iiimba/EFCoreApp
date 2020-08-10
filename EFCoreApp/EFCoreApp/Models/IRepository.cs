@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using EFCoreApp.Models;
 using System.Linq;
 
-namespace EFCore.Controllers
+namespace EFCore.Models
 {
     public interface IRepository
     {

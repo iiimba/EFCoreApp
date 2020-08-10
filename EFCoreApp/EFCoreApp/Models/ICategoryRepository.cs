@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace EFCoreApp.Controllers
+namespace EFCoreApp.Models
 {
     public interface ICategoryRepository
     {

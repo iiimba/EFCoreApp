@@ -1,6 +1,6 @@
 ﻿using EFCore.Controllers;
 
-namespace EFCoreApp.Controllers
+namespace EFCoreApp.Models
 {
     public class OrderLine
     {

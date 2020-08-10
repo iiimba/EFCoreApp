@@ -1,8 +1,9 @@
 ﻿using EFCore.Controllers;
+using EFCore.Models;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace EFCoreApp.Controllers
+namespace EFCoreApp.Models
 {
     public class CategoryRepository : ICategoryRepository
     {

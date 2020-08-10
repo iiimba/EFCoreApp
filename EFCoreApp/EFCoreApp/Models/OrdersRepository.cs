@@ -1,8 +1,8 @@
-﻿using EFCore.Controllers;
+﻿using EFCore.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
-namespace EFCoreApp.Controllers
+namespace EFCoreApp.Models
 {
     public class OrdersRepository : IOrdersRepository
     {
