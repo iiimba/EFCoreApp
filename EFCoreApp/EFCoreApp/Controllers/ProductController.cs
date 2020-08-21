@@ -62,6 +62,13 @@ namespace EFCore.Controllers
             return Ok();
         }
 
+        [HttpPost("Seed2")]
+        public IActionResult CreateSeedData2()
+        {
+            this.repository.CreateSeedData2();
+            return Ok();
+        }
+
         [HttpPut]
         public IActionResult Update(Product product)
         {

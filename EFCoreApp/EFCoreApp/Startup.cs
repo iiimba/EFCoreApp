@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace EFCore
 {
@@ -30,6 +31,20 @@ namespace EFCore
             {
                 options.UseSqlServer(connectionString);
                 options.EnableSensitiveDataLogging();
+            });
+
+            services.AddDistributedSqlServerCache(options => 
+            {
+                options.ConnectionString = connectionString;
+                options.SchemaName = "dbo";
+                options.TableName = "SessionData";
+            });
+
+            services.AddSession(options => 
+            {
+                options.Cookie.Name = "SportStore.Session";
+                options.IdleTimeout = TimeSpan.FromDays(1);
+                options.Cookie.HttpOnly = false;
             });
         }
 

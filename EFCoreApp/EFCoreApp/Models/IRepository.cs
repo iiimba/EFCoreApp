@@ -21,5 +21,7 @@ namespace EFCoreApp.Models
         void Delete(Product product);
 
         void CreateSeedData(int count);
+
+        void CreateSeedData2();
     }
 }

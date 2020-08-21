@@ -108,6 +108,68 @@ namespace EFCore.Models
             }
         }
 
+        public void CreateSeedData2()
+        {
+            ClearData();
+
+            context.Categories.AddRange(new Category[] 
+            {
+                new Category
+                {
+                    Name = "Watersports",
+                    Description = "Make a splash",
+                    Products = new Product[]
+                    {
+                        new Product
+                        {
+                            Name = "Kayak",
+                            Description = "A boat for one person",
+                            PurchasePrice = 200,
+                            RetailPrice = 275
+                        },
+                        new Product
+                        {
+                            Name = "Lifejacket",
+                            Description = "Protective and fashionable",
+                            PurchasePrice = 40,
+                            RetailPrice = 48.95m
+                        }
+                    }
+                },
+                new Category
+                {
+                    Name = "Soccer",
+                    Description = "The World's Favorite Game",
+                    Products = new Product[]
+                    {
+                        new Product
+                        {
+                            Name = "Soccer ball",
+                            Description = "FIFA approved size and weight",
+                            PurchasePrice = 18,
+                            RetailPrice = 19.5m
+                        },
+                        new Product
+                        {
+                            Name = "Corner Flag",
+                            Description = "Give your playing field a profeccional touch",
+                            PurchasePrice = 32.5m,
+                            RetailPrice = 34.95m
+                        },
+                        new Product
+                        {
+                            Name = "Stadium",
+                            Description = "Flat-packed 35000-seat stadium",
+                            PurchasePrice = 75000,
+                            RetailPrice = 79500
+                        }
+                    }
+                }
+            });
+
+            context.SaveChanges();
+        }
+
         private void ClearData()
         {
             this.context.Database.SetCommandTimeout(TimeSpan.FromMilliseconds(10));
