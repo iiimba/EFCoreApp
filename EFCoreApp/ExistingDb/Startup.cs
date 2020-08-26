@@ -1,3 +1,4 @@
+using ExistingDb.Models.Manual;
 using ExistingDb.Models.Scaffold;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -23,6 +24,10 @@ namespace ExistingDb
             services.AddControllers();
             var connectionString = this.Configuration["ConnectionStrings:DefaultConnection"];
             services.AddDbContext<ScaffoldContext>(options => 
+            {
+                options.UseSqlServer(connectionString);
+            });
+            services.AddDbContext<ManualContext>(options =>
             {
                 options.UseSqlServer(connectionString);
             });
