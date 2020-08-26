@@ -14,8 +14,10 @@ namespace ExistingDb.Models.Scaffold
         public string Name { get; set; }
         public long ColorId { get; set; }
         public decimal Price { get; set; }
+        public long? Fittingid { get; set; }
 
         public virtual Colors Color { get; set; }
+        public virtual Fittings Fitting { get; set; }
         public virtual SalesCampaigns SalesCampaigns { get; set; }
         public virtual ICollection<ShoeCategoryJunction> ShoeCategoryJunction { get; set; }
     }

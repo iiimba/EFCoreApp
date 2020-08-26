@@ -20,6 +20,7 @@ namespace ExistingDb.Controllers
                 .Include(s => s.Color)
                 .Include(s => s.SalesCampaigns)
                 .Include(s => s.ShoeCategoryJunction).ThenInclude(sc => sc.Category)
+                .Include(s => s.Fitting)
                 .ToList();
 
             return Ok();

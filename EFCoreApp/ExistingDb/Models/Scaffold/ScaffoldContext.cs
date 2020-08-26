@@ -17,6 +17,7 @@ namespace ExistingDb.Models.Scaffold
 
         public virtual DbSet<Categories> Categories { get; set; }
         public virtual DbSet<Colors> Colors { get; set; }
+        public virtual DbSet<Fittings> Fittings { get; set; }
         public virtual DbSet<SalesCampaigns> SalesCampaigns { get; set; }
         public virtual DbSet<ShoeCategoryJunction> ShoeCategoryJunction { get; set; }
         public virtual DbSet<Shoes> Shoes { get; set; }
@@ -34,6 +35,11 @@ namespace ExistingDb.Models.Scaffold
 
                 entity.Property(e => e.MainColor).IsRequired();
 
+                entity.Property(e => e.Name).IsRequired();
+            });
+
+            modelBuilder.Entity<Fittings>(entity =>
+            {
                 entity.Property(e => e.Name).IsRequired();
             });
 
@@ -77,6 +83,11 @@ namespace ExistingDb.Models.Scaffold
                     .HasForeignKey(d => d.ColorId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Shoes_Color");
+
+                entity.HasOne(d => d.Fitting)
+                    .WithMany(p => p.Shoes)
+                    .HasForeignKey(d => d.Fittingid)
+                    .HasConstraintName("FK_Shoes_Fittings");
             });
 
             OnModelCreatingPartial(modelBuilder);
