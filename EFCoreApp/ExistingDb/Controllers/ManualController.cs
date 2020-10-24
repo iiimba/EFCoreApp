@@ -1,5 +1,6 @@
 ﻿using ExistingDb.Models.Manual;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace ExistingDb.Controllers
@@ -14,8 +15,12 @@ namespace ExistingDb.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var shoes = this.context.Shoes.ToList();
-            var colors = this.context.ShoeStyles.ToList();
+            var shoes = this.context.Shoes
+                .Include(s => s.Style)
+                .Include(s => s.Width)
+                .Include(s => s.Categories)
+                .ThenInclude(j => j.Category)
+                .ToList();
 
             return Ok();
         }

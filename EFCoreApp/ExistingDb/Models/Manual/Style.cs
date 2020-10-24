@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ExistingDb.Models.Manual
@@ -16,5 +17,8 @@ namespace ExistingDb.Models.Manual
         public string MainColor { get; set; }
 
         public string HighlightColor { get; set; }
+
+        [InverseProperty(nameof(Shoe.Style))]
+        public IEnumerable<Shoe> Products { get; set; }
     }
 }
