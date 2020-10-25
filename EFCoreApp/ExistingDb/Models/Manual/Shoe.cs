@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ExistingDb.Models.Manual
 {
+    [Table("Shoes")]
     public class Shoe
     {
         public long Id { get; set; }
@@ -16,8 +17,8 @@ namespace ExistingDb.Models.Manual
         [Column("ColorId")]
         public long StyleId { get; set; }
 
-        [ForeignKey("StyleId")]
-        public Style Style { get; set; }
+        [ForeignKey(nameof(StyleId))]
+        public Style Stl { get; set; }
 
         public long WidthId { get; set; }
 

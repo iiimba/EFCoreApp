@@ -10,7 +10,7 @@ namespace ExistingDb.Models.Manual
 
         }
 
-        public DbSet<Shoe> Shoes { get; set; }
+        public DbSet<Shoe> Shoe { get; set; }
 
         public DbSet<Style> ShoeStyles { get; set; }
 

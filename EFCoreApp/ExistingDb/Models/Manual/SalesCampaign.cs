@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ExistingDb.Models.Manual
 {
-    [Table("SalesCampaign")]
+    [Table("SalesCampaigns")]
     public class SalesCampaign
     {
         public long Id { get; set; }

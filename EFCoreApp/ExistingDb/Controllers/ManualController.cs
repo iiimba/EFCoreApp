@@ -12,17 +12,30 @@ namespace ExistingDb.Controllers
         private ManualContext context;
 
         public ManualController(ManualContext context) => this.context = context;
+
         [HttpGet]
         public IActionResult Get()
         {
-            var shoes = this.context.Shoes
-                .Include(s => s.Style)
-                .Include(s => s.Width)
-                .Include(s => s.Categories)
+            var shoes = context.Shoe
+                .Include(s => s.Stl)
+                .Include(s => s.Width).Include(s => s.Categories)
                 .ThenInclude(j => j.Category)
+                .Select(s => new
+                { 
+                    s.Name,
+                    s.Price,
+                    s.Stl.StyleName,
+                    s.Width.WidthName,
+                    Categories = s.Categories.Select(c => new
+                    { 
+                        s.Name,
+                        s.Price
+                    })
+                })
                 .ToList();
 
-            return Ok();
+
+            return Ok(shoes);
         }
     }
 }
