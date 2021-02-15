@@ -14,15 +14,14 @@ namespace AdvancedApp.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Employee>().Property(e => e.Id).UseHiLo();
-            //modelBuilder.Entity<Employee>().HasIndex(e => e.SSN).IsUnique();
+            modelBuilder.Entity<Employee>().Ignore(e => e.Id);
+            modelBuilder.Entity<Employee>().HasKey(e => new { e.SSN, e.FirstName, e.FamilyName });
 
-            modelBuilder.Entity<Employee>().HasAlternateKey(s => s.SSN);
             modelBuilder.Entity<SecondaryIdentity>()
                 .HasOne(si => si.PrimaryIdentity)
                 .WithOne(e => e.OtherIdentity)
-                .HasPrincipalKey<Employee>(e => e.SSN)
-                .HasForeignKey<SecondaryIdentity>(si => si.PrimarySSN);
+                .HasPrincipalKey<Employee>(e => new { e.SSN, e.FirstName, e.FamilyName })
+                .HasForeignKey<SecondaryIdentity>(si => new { si.PrimarySSN, si.PrimaryFirstName, si.PrimaryFamilyName });
         }
     }
 }

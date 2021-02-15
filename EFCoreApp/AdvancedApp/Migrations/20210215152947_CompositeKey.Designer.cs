@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AdvancedApp.Migrations
 {
     [DbContext(typeof(AdvancedContext))]
-    [Migration("20210215144748_AlternateKey")]
-    partial class AlternateKey
+    [Migration("20210215152947_CompositeKey")]
+    partial class CompositeKey
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,31 +20,21 @@ namespace AdvancedApp.Migrations
                 .HasAnnotation("ProductVersion", "5.0.3")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.HasSequence("EntityFrameworkHiLoSequence")
-                .IncrementsBy(10);
-
             modelBuilder.Entity("AdvancedApp.Models.Employee", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:HiLoSequenceName", "EntityFrameworkHiLoSequence")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.SequenceHiLo);
-
-                    b.Property<string>("FamilyName")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("SSN")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("SSN")
-                        .IsRequired()
+                    b.Property<string>("FamilyName")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal>("Salary")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("Id");
+                    b.HasKey("SSN", "FirstName", "FamilyName");
 
                     b.ToTable("Employees");
                 });
@@ -62,14 +52,20 @@ namespace AdvancedApp.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PrimaryFamilyName")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("PrimaryFirstName")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("PrimarySSN")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PrimarySSN")
+                    b.HasIndex("PrimarySSN", "PrimaryFirstName", "PrimaryFamilyName")
                         .IsUnique()
-                        .HasFilter("[PrimarySSN] IS NOT NULL");
+                        .HasFilter("[PrimarySSN] IS NOT NULL AND [PrimaryFirstName] IS NOT NULL AND [PrimaryFamilyName] IS NOT NULL");
 
                     b.ToTable("SecondaryIdentity");
                 });
@@ -78,8 +74,7 @@ namespace AdvancedApp.Migrations
                 {
                     b.HasOne("AdvancedApp.Models.Employee", "PrimaryIdentity")
                         .WithOne("OtherIdentity")
-                        .HasForeignKey("AdvancedApp.Models.SecondaryIdentity", "PrimarySSN")
-                        .HasPrincipalKey("AdvancedApp.Models.Employee", "SSN");
+                        .HasForeignKey("AdvancedApp.Models.SecondaryIdentity", "PrimarySSN", "PrimaryFirstName", "PrimaryFamilyName");
 
                     b.Navigation("PrimaryIdentity");
                 });
