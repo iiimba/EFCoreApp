@@ -17,8 +17,7 @@ namespace ExistingDb.Models.Manual
         [Column("ColorId")]
         public long StyleId { get; set; }
 
-        [ForeignKey(nameof(StyleId))]
-        public Style Stl { get; set; }
+        public Style Style { get; set; }
 
         public long WidthId { get; set; }
 

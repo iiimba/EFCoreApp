@@ -21,11 +21,11 @@ namespace ExistingDb.Models.Manual
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ShoeWidth>().ToTable("Fittings");
-            modelBuilder.Entity<ShoeWidth>().HasKey(t => t.UniqueIdent);
-            modelBuilder.Entity<ShoeWidth>().Property(t => t.UniqueIdent).HasColumnName("Id");
-            modelBuilder.Entity<ShoeWidth>().Property(t => t.WidthName).HasColumnName("Name");
-            modelBuilder.Entity<Shoe>().Property(t => t.WidthId).HasColumnName("FittingId");
-            modelBuilder.Entity<Shoe>().HasOne(t => t.Width).WithMany(w => w.Products).HasForeignKey(s => s.WidthId).IsRequired();
+            modelBuilder.Entity<ShoeWidth>().HasKey(sw => sw.UniqueIdent);
+            modelBuilder.Entity<ShoeWidth>().Property(sw => sw.UniqueIdent).HasColumnName("Id");
+            modelBuilder.Entity<ShoeWidth>().Property(sw => sw.WidthName).HasColumnName("Name");
+            modelBuilder.Entity<Shoe>().Property(sw => sw.WidthId).HasColumnName("FittingId");
+            modelBuilder.Entity<Shoe>().HasOne(s => s.Width).WithMany(sw => sw.Products).HasForeignKey(s => s.WidthId).IsRequired();
         }
     }
 }
