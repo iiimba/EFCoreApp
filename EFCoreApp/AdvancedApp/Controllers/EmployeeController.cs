@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AdvancedApp.Models.Repositories.Interfaces;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace AdvancedApp.Controllers
 {
@@ -6,9 +8,19 @@ namespace AdvancedApp.Controllers
     [Route("api/[controller]")]
     public class EmployeeController : ControllerBase
     {
-        public IActionResult Get()
+        private readonly IEmployeeRepository repository;
+
+        public EmployeeController(IEmployeeRepository repository)
         {
-            return Ok();
+            this.repository = repository;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            var employees = await repository.GetEmployeesAsync();
+
+            return Ok(employees);
         }
     }
 }
