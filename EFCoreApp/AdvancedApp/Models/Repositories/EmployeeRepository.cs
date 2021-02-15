@@ -1,5 +1,6 @@
 ﻿using AdvancedApp.Models.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Threading.Tasks;
 
 namespace AdvancedApp.Models.Repositories
@@ -22,9 +23,9 @@ namespace AdvancedApp.Models.Repositories
 
         public async Task InsertNewEmployeeAsync()
         {
-            var employee = new Employee 
+            var employee = new Employee
             {
-                SSN = "12345",
+                SSN = Guid.NewGuid().ToString(),
                 FirstName = "Vlad",
                 FamilyName = "Mis",
                 Salary = 500

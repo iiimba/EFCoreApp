@@ -15,6 +15,7 @@ namespace AdvancedApp.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Employee>().Property(e => e.Id).UseHiLo();
+            modelBuilder.Entity<Employee>().HasIndex(e => e.SSN).IsUnique();
         }
     }
 }
