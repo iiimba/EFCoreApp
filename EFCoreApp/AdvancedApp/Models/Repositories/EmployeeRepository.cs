@@ -1,6 +1,7 @@
 ﻿using AdvancedApp.Models.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace AdvancedApp.Models.Repositories
@@ -16,7 +17,20 @@ namespace AdvancedApp.Models.Repositories
 
         public async Task<Employee[]> GetEmployeesAsync()
         {
-            var employees = await context.Employees.ToArrayAsync();
+            var employees = await context.Employees
+                .Include(e => e.OtherIdentity)
+                .Select(e => new Employee
+                {
+                    Id = e.Id,
+                    FirstName = e.FirstName,
+                    SSN = e.SSN,
+                    OtherIdentity = e.OtherIdentity == null ? null : new SecondaryIdentity
+                    {
+                        Name = e.OtherIdentity.Name,
+                        InActiveUse = e.OtherIdentity.InActiveUse
+                    }
+                })
+                .ToArrayAsync();
 
             return employees;
         }
