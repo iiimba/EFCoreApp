@@ -5,5 +5,7 @@ namespace AdvancedApp.Models.Repositories.Interfaces
     public interface IEmployeeRepository
     {
         Task<Employee[]> GetEmployeesAsync();
+
+        Task InsertNewEmployeeAsync();
     }
 }

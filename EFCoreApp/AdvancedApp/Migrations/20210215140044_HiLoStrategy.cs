@@ -2,16 +2,19 @@
 
 namespace AdvancedApp.Migrations
 {
-    public partial class Initial : Migration
+    public partial class HiLoStrategy : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateSequence(
+                name: "EntityFrameworkHiLoSequence",
+                incrementBy: 10);
+
             migrationBuilder.CreateTable(
                 name: "Employees",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<long>(type: "bigint", nullable: false),
                     SSN = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FamilyName = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -27,6 +30,9 @@ namespace AdvancedApp.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Employees");
+
+            migrationBuilder.DropSequence(
+                name: "EntityFrameworkHiLoSequence");
         }
     }
 }

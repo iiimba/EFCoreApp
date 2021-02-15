@@ -19,5 +19,19 @@ namespace AdvancedApp.Models.Repositories
 
             return employees;
         }
+
+        public async Task InsertNewEmployeeAsync()
+        {
+            var employee = new Employee 
+            {
+                SSN = "12345",
+                FirstName = "Vlad",
+                FamilyName = "Mis",
+                Salary = 500
+            };
+
+            context.Employees.Add(employee);
+            await context.SaveChangesAsync();
+        }
     }
 }

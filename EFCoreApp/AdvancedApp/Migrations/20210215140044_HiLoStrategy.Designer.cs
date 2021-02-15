@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AdvancedApp.Migrations
 {
     [DbContext(typeof(AdvancedContext))]
-    [Migration("20210215134132_Initial")]
-    partial class Initial
+    [Migration("20210215140044_HiLoStrategy")]
+    partial class HiLoStrategy
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,12 +20,16 @@ namespace AdvancedApp.Migrations
                 .HasAnnotation("ProductVersion", "5.0.3")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.HasSequence("EntityFrameworkHiLoSequence")
+                .IncrementsBy(10);
+
             modelBuilder.Entity("AdvancedApp.Models.Employee", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasAnnotation("SqlServer:HiLoSequenceName", "EntityFrameworkHiLoSequence")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.SequenceHiLo);
 
                     b.Property<string>("FamilyName")
                         .HasColumnType("nvarchar(max)");

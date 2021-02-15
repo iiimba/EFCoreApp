@@ -22,5 +22,13 @@ namespace AdvancedApp.Controllers
 
             return Ok(employees);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> TestHiLoStrategy()
+        {
+            await repository.InsertNewEmployeeAsync();
+
+            return Ok();
+        }
     }
 }
