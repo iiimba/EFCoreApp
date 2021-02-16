@@ -1,14 +1,15 @@
-﻿using System.Threading.Tasks;
+﻿using AdvancedApp.DTOs;
+using System.Threading.Tasks;
 
 namespace AdvancedApp.Models.Repositories.Interfaces
 {
     public interface IEmployeeRepository
     {
-        Task<Employee[]> GetEmployeesAsync();
+        Task<EmployeeDTO[]> GetEmployeesAsync();
 
-        Task<Employee[]> GetEmployeesIncludeDeletedAsync();
+        Task<EmployeeDTO[]> GetEmployeesIncludeDeletedAsync();
 
-        Task<Employee[]> GetEmployeesBySearchTermAsync(string searchTerm);
+        Task<EmployeeDTO[]> GetEmployeesBySearchTermAsync(string searchTerm);
 
         Task InsertNewEmployeeAsync();
 

@@ -1,4 +1,5 @@
-﻿using AdvancedApp.Models.Repositories.Interfaces;
+﻿using AdvancedApp.DTOs;
+using AdvancedApp.Models.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
@@ -15,63 +16,33 @@ namespace AdvancedApp.Models.Repositories
             this.context = context;
         }
 
-        public async Task<Employee[]> GetEmployeesAsync()
+        public async Task<EmployeeDTO[]> GetEmployeesAsync()
         {
             var employees = await context.Employees
                 .Include(e => e.OtherIdentity)
-                .Select(e => new Employee
-                {
-                    Id = e.Id,
-                    FirstName = e.FirstName,
-                    SSN = e.SSN,
-                    OtherIdentity = e.OtherIdentity == null ? null : new SecondaryIdentity
-                    {
-                        Name = e.OtherIdentity.Name,
-                        InActiveUse = e.OtherIdentity.InActiveUse
-                    }
-                })
+                .Select(e => new EmployeeDTO(e))
                 .ToArrayAsync();
 
             return employees;
         }
 
-        public async Task<Employee[]> GetEmployeesIncludeDeletedAsync()
+        public async Task<EmployeeDTO[]> GetEmployeesIncludeDeletedAsync()
         {
             var employees = await context.Employees
                 .Include(e => e.OtherIdentity)
                 .IgnoreQueryFilters()
-                .Select(e => new Employee
-                {
-                    Id = e.Id,
-                    FirstName = e.FirstName,
-                    SSN = e.SSN,
-                    OtherIdentity = e.OtherIdentity == null ? null : new SecondaryIdentity
-                    {
-                        Name = e.OtherIdentity.Name,
-                        InActiveUse = e.OtherIdentity.InActiveUse
-                    }
-                })
+                .Select(e => new EmployeeDTO(e))
                 .ToArrayAsync();
 
             return employees;
         }
 
-        public async Task<Employee[]> GetEmployeesBySearchTermAsync(string searchTerm)
+        public async Task<EmployeeDTO[]> GetEmployeesBySearchTermAsync(string searchTerm)
         {
             var employees = await context.Employees
                 .Include(e => e.OtherIdentity)
                 .Where(e => EF.Functions.Like(e.FirstName, searchTerm))
-                .Select(e => new Employee
-                {
-                    Id = e.Id,
-                    FirstName = e.FirstName,
-                    SSN = e.SSN,
-                    OtherIdentity = e.OtherIdentity == null ? null : new SecondaryIdentity
-                    {
-                        Name = e.OtherIdentity.Name,
-                        InActiveUse = e.OtherIdentity.InActiveUse
-                    }
-                })
+                .Select(e => new EmployeeDTO(e))
                 .ToArrayAsync();
 
             return employees;
