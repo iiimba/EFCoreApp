@@ -23,12 +23,36 @@ namespace AdvancedApp.Controllers
             return Ok(employees);
         }
 
+        [HttpGet("{searchTerm}")]
+        public async Task<IActionResult> GetEmployeesBySearchTermAsync(string searchTerm)
+        {
+            var employees = await repository.GetEmployeesBySearchTermAsync(searchTerm);
+
+            return Ok(employees);
+        }
+
+        [HttpGet("All")]
+        public async Task<IActionResult> GetEmployeesIncludeDeletedAsync()
+        {
+            var employees = await repository.GetEmployeesIncludeDeletedAsync();
+
+            return Ok(employees);
+        }
+
         [HttpPost]
-        public async Task<IActionResult> TestHiLoStrategy()
+        public async Task<IActionResult> TestHiLoStrategyAsync()
         {
             await repository.InsertNewEmployeeAsync();
 
             return Ok();
+        }
+
+        [HttpDelete("{ssn}")]
+        public async Task<IActionResult> SoftDeleteByIdAsync(string ssn)
+        {
+            var isSoftDeleted = await repository.SoftDeleteByIdAsync(ssn);
+
+            return Ok(isSoftDeleted);
         }
     }
 }

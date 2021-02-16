@@ -6,6 +6,12 @@ namespace AdvancedApp.Models.Repositories.Interfaces
     {
         Task<Employee[]> GetEmployeesAsync();
 
+        Task<Employee[]> GetEmployeesIncludeDeletedAsync();
+
+        Task<Employee[]> GetEmployeesBySearchTermAsync(string searchTerm);
+
         Task InsertNewEmployeeAsync();
+
+        Task<bool> SoftDeleteByIdAsync(string ssn);
     }
 }
