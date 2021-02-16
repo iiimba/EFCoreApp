@@ -1,4 +1,5 @@
 ﻿using AdvancedApp.Models;
+using System;
 
 namespace AdvancedApp.DTOs
 {
@@ -16,11 +17,14 @@ namespace AdvancedApp.DTOs
 
         public bool SoftDeleted { get; set; }
 
+        public DateTime LastUpdated { get; set; }
+
         public EmployeeDTO(Employee employee)
         {
             FirstName = employee.FirstName;
             SSN = employee.SSN;
             Salary = employee.Salary;
+            LastUpdated = employee.LastUpdated;
             OtherIdentity = employee.OtherIdentity == null ? null : new SecondaryIdentityDTO
             {
                 Name = employee.OtherIdentity.Name,

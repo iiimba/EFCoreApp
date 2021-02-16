@@ -20,7 +20,8 @@ namespace AdvancedApp.Models.Repositories
         {
             var employees = await context.Employees
                 .Include(e => e.OtherIdentity)
-                .OrderBy(e => EF.Property<DateTime>(e, "LastUpdated"))
+                //.OrderBy(e => EF.Property<DateTime>(e, "LastUpdated"))
+                .OrderBy(e => e.LastUpdated)
                 .Select(e => new EmployeeDTO(e))
                 .ToArrayAsync();
 
@@ -56,7 +57,8 @@ namespace AdvancedApp.Models.Repositories
                 SSN = Guid.NewGuid().ToString(),
                 FirstName = "Vlad",
                 FamilyName = "Mis",
-                Salary = 500
+                Salary = 500,
+                LastUpdated = DateTime.Now
             };
 
             //context.Entry(employee).Property("LastUpdated").CurrentValue = DateTime.Now;
