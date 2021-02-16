@@ -16,8 +16,8 @@ namespace AdvancedApp.Models
 
         public decimal Salary 
         {
-            get { return databaseSalary * 2; }
-            set { databaseSalary = Math.Max(0, value); }
+            get { return databaseSalary; }
+            set { databaseSalary = value; }
         }
 
         public SecondaryIdentity OtherIdentity { get; set; }
