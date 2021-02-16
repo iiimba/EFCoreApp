@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace AdvancedApp.Models
 {
@@ -26,6 +27,9 @@ namespace AdvancedApp.Models
                 .HasColumnType("decimal(8,2)")
                 .HasField("databaseSalary")
                 .UsePropertyAccessMode(PropertyAccessMode.Field);
+            modelBuilder.Entity<Employee>()
+                .Property<DateTime>("LastUpdated")
+                .HasDefaultValue(DateTime.Now);
 
             modelBuilder.Entity<SecondaryIdentity>().Property(e => e.Name).HasMaxLength(100);
             modelBuilder.Entity<SecondaryIdentity>()
