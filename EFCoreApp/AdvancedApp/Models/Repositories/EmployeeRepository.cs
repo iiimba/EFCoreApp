@@ -80,5 +80,20 @@ namespace AdvancedApp.Models.Repositories
 
             return isSoftDeleted;
         }
+
+        public async Task<bool> UpdateAsync(EmployeeDTO employeeDTO)
+        {
+            var employee = await context.Employees.FindAsync(employeeDTO.SSN, employeeDTO.FirstName, employeeDTO.FamilyName);
+            if (employee == null)
+            {
+                return false;
+            }
+
+            employee.Salary = employeeDTO.Salary;
+
+            var updated = await context.SaveChangesAsync() == 1;
+
+            return updated;
+        }
     }
 }

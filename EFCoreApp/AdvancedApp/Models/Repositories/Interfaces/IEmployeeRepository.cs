@@ -14,5 +14,7 @@ namespace AdvancedApp.Models.Repositories.Interfaces
         Task InsertNewEmployeeAsync();
 
         Task<bool> SoftDeleteByIdAsync(string ssn);
+
+        Task<bool> UpdateAsync(EmployeeDTO employeeDTO);
     }
 }

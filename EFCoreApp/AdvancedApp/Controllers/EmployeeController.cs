@@ -1,4 +1,5 @@
-﻿using AdvancedApp.Models.Repositories.Interfaces;
+﻿using AdvancedApp.DTOs;
+using AdvancedApp.Models.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -45,6 +46,14 @@ namespace AdvancedApp.Controllers
             await repository.InsertNewEmployeeAsync();
 
             return Ok();
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateAsync(EmployeeDTO employeeDTO)
+        {
+            var updated = await repository.UpdateAsync(employeeDTO);
+
+            return Ok(updated);
         }
 
         [HttpDelete("{ssn}")]

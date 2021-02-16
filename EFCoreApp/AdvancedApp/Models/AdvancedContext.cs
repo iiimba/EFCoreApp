@@ -26,11 +26,12 @@ namespace AdvancedApp.Models
                 .Property(e => e.Salary)
                 .HasColumnType("decimal(8,2)")
                 .HasField("databaseSalary")
-                .UsePropertyAccessMode(PropertyAccessMode.Field)
-                .IsConcurrencyToken();
+                .UsePropertyAccessMode(PropertyAccessMode.Field);
+                //.IsConcurrencyToken();
             modelBuilder.Entity<Employee>()
                 .Property<DateTime>("LastUpdated")
                 .HasDefaultValue(DateTime.Now);
+            modelBuilder.Entity<Employee>().Property(e => e.RowVersion).IsRowVersion();
 
             modelBuilder.Entity<SecondaryIdentity>().Property(e => e.Name).HasMaxLength(100);
             modelBuilder.Entity<SecondaryIdentity>()

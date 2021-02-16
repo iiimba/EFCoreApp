@@ -19,6 +19,11 @@ namespace AdvancedApp.DTOs
 
         public DateTime LastUpdated { get; set; }
 
+        public EmployeeDTO()
+        {
+
+        }
+
         public EmployeeDTO(Employee employee)
         {
             FirstName = employee.FirstName;
