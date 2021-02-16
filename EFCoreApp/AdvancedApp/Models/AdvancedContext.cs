@@ -21,7 +21,9 @@ namespace AdvancedApp.Models
             modelBuilder.Entity<Employee>().Ignore(e => e.Id);
             modelBuilder.Entity<Employee>().HasKey(e => new { e.SSN, e.FirstName, e.FamilyName });
             modelBuilder.Entity<Employee>().Property(e => e.SoftDeleted).HasDefaultValue(false);
+            modelBuilder.Entity<Employee>().Property(e => e.Salary).HasColumnType("decimal(8,2)");
 
+            modelBuilder.Entity<SecondaryIdentity>().Property(e => e.Name).HasMaxLength(100);
             modelBuilder.Entity<SecondaryIdentity>()
                 .HasOne(si => si.PrimaryIdentity)
                 .WithOne(e => e.OtherIdentity)
