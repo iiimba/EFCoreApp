@@ -1,4 +1,5 @@
 ﻿using AdvancedApp.DTOs;
+using AdvancedApp.Models;
 using AdvancedApp.Models.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -62,6 +63,14 @@ namespace AdvancedApp.Controllers
             var isSoftDeleted = await repository.SoftDeleteByIdAsync(ssn);
 
             return Ok(isSoftDeleted);
+        }
+
+        [HttpDelete("Hard")]
+        public async Task<IActionResult> DeleteAsync(Employee employee)
+        {
+            var deleted = await repository.DeleteAsync(employee);
+
+            return Ok(deleted);
         }
     }
 }

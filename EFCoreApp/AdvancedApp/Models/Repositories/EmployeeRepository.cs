@@ -95,5 +95,19 @@ namespace AdvancedApp.Models.Repositories
 
             return updated;
         }
+
+        public async Task<bool> DeleteAsync(Employee employee)
+        {
+            var employeeDB = await context.Employees.FindAsync(employee.SSN, employee.FirstName, employee.FamilyName);
+            if (employeeDB == null)
+            {
+                return false;
+            }
+
+            context.Remove(employeeDB);
+            var deleted = await context.SaveChangesAsync() == 1;
+
+            return deleted;
+        }
     }
 }

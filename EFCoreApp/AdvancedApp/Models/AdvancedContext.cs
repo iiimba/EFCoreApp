@@ -30,7 +30,7 @@ namespace AdvancedApp.Models
                 //.IsConcurrencyToken();
             modelBuilder.Entity<Employee>()
                 .Property<DateTime>("LastUpdated")
-                .HasDefaultValue(DateTime.Now);
+                .HasDefaultValue(new DateTime(2020, 1, 1));
             modelBuilder.Entity<Employee>().Property(e => e.RowVersion).IsRowVersion();
 
             modelBuilder.Entity<SecondaryIdentity>().Property(e => e.Name).HasMaxLength(100);
@@ -38,7 +38,8 @@ namespace AdvancedApp.Models
                 .HasOne(si => si.PrimaryIdentity)
                 .WithOne(e => e.OtherIdentity)
                 .HasPrincipalKey<Employee>(e => new { e.SSN, e.FirstName, e.FamilyName })
-                .HasForeignKey<SecondaryIdentity>(si => new { si.PrimarySSN, si.PrimaryFirstName, si.PrimaryFamilyName });
+                .HasForeignKey<SecondaryIdentity>(si => new { si.PrimarySSN, si.PrimaryFirstName, si.PrimaryFamilyName })
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
