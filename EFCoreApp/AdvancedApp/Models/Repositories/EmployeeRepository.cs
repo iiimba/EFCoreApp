@@ -98,14 +98,17 @@ namespace AdvancedApp.Models.Repositories
 
         public async Task<bool> DeleteAsync(Employee employee)
         {
-            var employeeDB = await context.Employees.FindAsync(employee.SSN, employee.FirstName, employee.FamilyName);
+            var employeeDB = await context.Employees
+                .Include(e => e.OtherIdentity)
+                .FirstOrDefaultAsync(e => e.SSN == employee.SSN && e.FirstName == employee.FirstName && e.FamilyName == employee.FamilyName);
+
             if (employeeDB == null)
             {
                 return false;
             }
 
             context.Remove(employeeDB);
-            var deleted = await context.SaveChangesAsync() == 1;
+            var deleted = await context.SaveChangesAsync() > 0;
 
             return deleted;
         }

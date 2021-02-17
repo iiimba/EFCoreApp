@@ -39,7 +39,7 @@ namespace AdvancedApp.Models
                 .WithOne(e => e.OtherIdentity)
                 .HasPrincipalKey<Employee>(e => new { e.SSN, e.FirstName, e.FamilyName })
                 .HasForeignKey<SecondaryIdentity>(si => new { si.PrimarySSN, si.PrimaryFirstName, si.PrimaryFamilyName })
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
