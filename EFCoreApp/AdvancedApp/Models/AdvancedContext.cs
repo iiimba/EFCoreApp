@@ -9,6 +9,7 @@ namespace AdvancedApp.Models
             : base(options)
         {
             //ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+            //Database.AutoTransactionsEnabled = false;
         }
 
         public DbSet<Employee> Employees { get; set; }
