@@ -18,6 +18,24 @@ namespace AdvancedApp.Models.Repositories
 
         public async Task<EmployeeDTO[]> GetEmployeesAsync()
         {
+            //var employeeFromSql = await context.Employees
+            //    .FromSqlRaw(@"exec GetBySalary @SalaryFilter = {0}", 500)
+            //    .IgnoreQueryFilters()
+            //    .ToArrayAsync();
+
+            //var employeeFromSql = await context.Employees
+            //    .FromSqlRaw(@"select * from NotDeletedView e
+            //                where e.Salary > {0}", 600)
+            //    .Include(e => e.OtherIdentity)
+            //    .ToArrayAsync();
+
+            //var employeeFromSql = await context.Employees
+            //    .FromSqlRaw(@"select * from dbo.GetSalaryTable({0})", 600)
+            //    .Include(e => e.OtherIdentity)
+            //    .ToArrayAsync();
+
+            //var count = await context.Database.ExecuteSqlRawAsync("exec RestoreSoftDelete");
+
             var employees = await context.Employees
                 .Include(e => e.OtherIdentity)
                 //.OrderBy(e => EF.Property<DateTime>(e, "LastUpdated"))

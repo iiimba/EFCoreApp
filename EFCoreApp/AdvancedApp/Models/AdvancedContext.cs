@@ -28,10 +28,29 @@ namespace AdvancedApp.Models
                 .HasField("databaseSalary")
                 .UsePropertyAccessMode(PropertyAccessMode.Field);
                 //.IsConcurrencyToken();
+            
             modelBuilder.Entity<Employee>()
                 .Property<DateTime>("LastUpdated")
                 .HasDefaultValue(new DateTime(2020, 1, 1));
-            modelBuilder.Entity<Employee>().Property(e => e.RowVersion).IsRowVersion();
+            
+            modelBuilder.Entity<Employee>().Ignore(e => e.RowVersion);
+            //.Property(e => e.RowVersion).IsRowVersion();
+
+            modelBuilder.HasSequence<int>("ReferenceSequence")
+                .StartsAt(100)
+                .IncrementsBy(2);
+
+            //modelBuilder.Entity<Employee>()
+            //    .Property(e => e.GeneratedValue)
+            //    .HasDefaultValueSql("'REFERENCE_' + CONVERT(varchar, NEXT VALUE FOR ReferenceSequence)");
+
+            //modelBuilder.Entity<Employee>()
+            //    .Property(e => e.GeneratedValue)
+            //    .HasComputedColumnSql(@"SUBSTRING(FirstName, 1, 1) + FamilyName PERSISTED");
+
+            modelBuilder.Entity<Employee>()
+                .Property(e => e.GeneratedValue)
+                .ValueGeneratedOnAddOrUpdate();
 
             modelBuilder.Entity<SecondaryIdentity>().Property(e => e.Name).HasMaxLength(100);
             modelBuilder.Entity<SecondaryIdentity>()

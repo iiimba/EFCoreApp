@@ -4,14 +4,16 @@ using AdvancedApp.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AdvancedApp.Migrations
 {
     [DbContext(typeof(AdvancedContext))]
-    partial class AdvancedContextModelSnapshot : ModelSnapshot
+    [Migration("20210218103753_Sequence")]
+    partial class Sequence
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,8 +37,9 @@ namespace AdvancedApp.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("GeneratedValue")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("nvarchar(max)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(max)")
+                        .HasDefaultValueSql("'REFERENCE_' + CONVERT(varchar, NEXT VALUE FOR ReferenceSequence)");
 
                     b.Property<DateTime>("LastUpdated")
                         .ValueGeneratedOnAdd()

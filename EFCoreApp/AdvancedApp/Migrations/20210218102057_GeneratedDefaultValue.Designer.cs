@@ -4,24 +4,22 @@ using AdvancedApp.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AdvancedApp.Migrations
 {
     [DbContext(typeof(AdvancedContext))]
-    partial class AdvancedContextModelSnapshot : ModelSnapshot
+    [Migration("20210218102057_GeneratedDefaultValue")]
+    partial class GeneratedDefaultValue
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.3")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.HasSequence<int>("ReferenceSequence")
-                .StartsAt(100L)
-                .IncrementsBy(2);
 
             modelBuilder.Entity("AdvancedApp.Models.Employee", b =>
                 {
@@ -35,8 +33,9 @@ namespace AdvancedApp.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("GeneratedValue")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("nvarchar(max)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(max)")
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<DateTime>("LastUpdated")
                         .ValueGeneratedOnAdd()
