@@ -14,7 +14,7 @@ namespace AdvancedApp.Models
 
         public DbSet<Employee> Employees { get; set; }
 
-        public DbSet<SecondaryIdentity> SecondaryIdentity { get; set; }
+        public DbSet<SecondaryIdentity> SecondaryIdentities { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -57,6 +57,7 @@ namespace AdvancedApp.Models
                 .Property(e => e.NChar)
                 .HasColumnType("NCHAR(10)");
 
+            modelBuilder.Entity<SecondaryIdentity>().ToTable("SecondaryIdentity");
             modelBuilder.Entity<SecondaryIdentity>().Property(e => e.Name).HasMaxLength(100);
             modelBuilder.Entity<SecondaryIdentity>()
                 .HasOne(si => si.PrimaryIdentity)

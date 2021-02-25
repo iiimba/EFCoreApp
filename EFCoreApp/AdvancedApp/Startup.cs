@@ -31,6 +31,7 @@ namespace AdvancedApp
             });
 
             services.AddTransient<IEmployeeRepository, EmployeeRepository>();
+            services.AddTransient<ISecondaryIdentityRepository, SecondaryIdentityRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
