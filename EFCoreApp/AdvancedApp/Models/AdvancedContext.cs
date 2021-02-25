@@ -53,6 +53,10 @@ namespace AdvancedApp.Models
                 .Property(e => e.GeneratedValue)
                 .ValueGeneratedOnAddOrUpdate();
 
+            modelBuilder.Entity<Employee>()
+                .Property(e => e.NChar)
+                .HasColumnType("NCHAR(10)");
+
             modelBuilder.Entity<SecondaryIdentity>().Property(e => e.Name).HasMaxLength(100);
             modelBuilder.Entity<SecondaryIdentity>()
                 .HasOne(si => si.PrimaryIdentity)

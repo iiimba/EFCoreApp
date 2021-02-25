@@ -29,5 +29,7 @@ namespace AdvancedApp.Models
         public byte[] RowVersion { get; set; }
 
         public string GeneratedValue { get; set; }
+
+        public string NChar { get; set; }
     }
 }

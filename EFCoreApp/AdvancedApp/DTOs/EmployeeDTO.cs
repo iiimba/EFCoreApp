@@ -19,6 +19,8 @@ namespace AdvancedApp.DTOs
 
         public DateTime LastUpdated { get; set; }
 
+        public string NChar { get; set; }
+
         public EmployeeDTO()
         {
 
@@ -30,6 +32,7 @@ namespace AdvancedApp.DTOs
             SSN = employee.SSN;
             Salary = employee.Salary;
             LastUpdated = employee.LastUpdated;
+            NChar = employee.NChar;
             OtherIdentity = employee.OtherIdentity == null ? null : new SecondaryIdentityDTO
             {
                 Name = employee.OtherIdentity.Name,
