@@ -20,6 +20,10 @@ namespace AdvancedApp.Models
 
         public DbSet<Category> Categories { get; set; }
 
+        public DbSet<Computer> Computers { get; set; }
+
+        public DbSet<ComputerDetail> ComputerDetails { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Employee>().HasQueryFilter(e => !e.SoftDeleted);

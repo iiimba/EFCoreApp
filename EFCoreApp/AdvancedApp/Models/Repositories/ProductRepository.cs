@@ -17,7 +17,13 @@ namespace AdvancedApp.Models.Repositories
 
         public async Task<ProductDTO[]> GetProductsAsync()
         {
-            var products = await context.Products.Include(p => p.Category).ToArrayAsync();
+            // fixing up
+            var categoty = await context.Categories
+                .FirstOrDefaultAsync(c => c.Id == 1);
+
+            var products = await context.Products
+                //.Include(p => p.Category)
+                .ToArrayAsync();
 
             return products.Select(p => new ProductDTO(p)).ToArray();
         }
