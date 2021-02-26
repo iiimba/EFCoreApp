@@ -28,6 +28,12 @@ namespace AdvancedApp.Models
 
         public DbSet<Person2> Person2s { get; set; }
 
+        public DbSet<Teacher> Teachers { get; set; }
+
+        public DbSet<Student> Students { get; set; }
+
+        public DbSet<TeacherStudentJunction> Junctions { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Employee>().HasQueryFilter(e => !e.SoftDeleted);
