@@ -16,6 +16,10 @@ namespace AdvancedApp.Models
 
         public DbSet<SecondaryIdentity> SecondaryIdentities { get; set; }
 
+        public DbSet<Product> Products { get; set; }
+
+        public DbSet<Category> Categories { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Employee>().HasQueryFilter(e => !e.SoftDeleted);
@@ -65,6 +69,9 @@ namespace AdvancedApp.Models
                 .HasPrincipalKey<Employee>(e => new { e.SSN, e.FirstName, e.FamilyName })
                 .HasForeignKey<SecondaryIdentity>(si => new { si.PrimarySSN, si.PrimaryFirstName, si.PrimaryFamilyName })
                 .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Product>().ToTable("Product");
+            modelBuilder.Entity<Category>().ToTable("Category");
         }
     }
 }
