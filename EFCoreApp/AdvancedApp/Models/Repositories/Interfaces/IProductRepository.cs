@@ -1,12 +1,13 @@
-﻿using System.Threading.Tasks;
+﻿using AdvancedApp.DTOs;
+using System.Threading.Tasks;
 
 namespace AdvancedApp.Models.Repositories.Interfaces
 {
     public interface IProductRepository
     {
-        Task<Product[]> GetProductsAsync();
+        Task<ProductDTO[]> GetProductsAsync();
 
-        Task<Product> GetProductAsync(long id);
+        Task<ProductDTO> GetProductAsync(long id);
 
         Task<bool> CreateProductAsync(Product product);
 

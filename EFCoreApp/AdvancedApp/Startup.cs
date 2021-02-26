@@ -33,6 +33,7 @@ namespace AdvancedApp
             services.AddTransient<IEmployeeRepository, EmployeeRepository>();
             services.AddTransient<ISecondaryIdentityRepository, SecondaryIdentityRepository>();
             services.AddTransient<IProductRepository, ProductRepository>();
+            services.AddTransient<ICategoryRepository, CategoryRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

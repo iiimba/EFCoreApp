@@ -1,5 +1,7 @@
-﻿using AdvancedApp.Models.Repositories.Interfaces;
+﻿using AdvancedApp.DTOs;
+using AdvancedApp.Models.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace AdvancedApp.Models.Repositories
@@ -13,20 +15,20 @@ namespace AdvancedApp.Models.Repositories
             this.context = context;
         }
 
-        public async Task<Product[]> GetProductsAsync()
+        public async Task<ProductDTO[]> GetProductsAsync()
         {
             var products = await context.Products.Include(p => p.Category).ToArrayAsync();
 
-            return products;
+            return products.Select(p => new ProductDTO(p)).ToArray();
         }
 
-        public async Task<Product> GetProductAsync(long id)
+        public async Task<ProductDTO> GetProductAsync(long id)
         {
             var product = await context.Products
                 .Include(p => p.Category)
                 .FirstOrDefaultAsync(p => p.Id == id);
 
-            return product;
+            return new ProductDTO(product);
         }
 
         public async Task<bool> CreateProductAsync(Product product)
