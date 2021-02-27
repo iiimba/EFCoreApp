@@ -85,6 +85,8 @@ namespace AdvancedApp.Models
                 .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Product>().ToTable("Product");
+            modelBuilder.Entity<Product>().HasQueryFilter(p => !p.SoftDeleted);
+
             modelBuilder.Entity<Category>().ToTable("Category");
         }
     }

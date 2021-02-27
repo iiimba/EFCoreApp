@@ -11,5 +11,7 @@
         public long CategoryId { get; set; }
 
         public Category Category { get; set; }
+
+        public bool SoftDeleted { get; set; }
     }
 }
