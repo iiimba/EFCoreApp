@@ -88,6 +88,9 @@ namespace AdvancedApp.Models
             modelBuilder.Entity<Product>().HasQueryFilter(p => !p.SoftDeleted);
 
             modelBuilder.Entity<Category>().ToTable("Category");
+            modelBuilder.Entity<Category>()
+                .Property(c => c.RowVersion)
+                .IsRowVersion();
         }
     }
 }

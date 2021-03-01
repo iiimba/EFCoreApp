@@ -10,6 +10,8 @@ namespace AdvancedApp.Models
 
         public string Description { get; set; }
 
+        public byte[] RowVersion { get; set; }
+
         public IEnumerable<Product> Products { get; set; }
     }
 }
